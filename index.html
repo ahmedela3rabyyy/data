@@ -35,7 +35,6 @@ body {
   overflow-x: hidden;
 }
 
-/* ── Animated grid bg & Custom Scrollbar ── */
 ::-webkit-scrollbar { width: 6px; height: 6px; }
 ::-webkit-scrollbar-track { background: var(--bg); }
 ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
@@ -99,7 +98,7 @@ header {
   position:relative; overflow:hidden; transition:all .3s ease;
   box-shadow: 0 4px 24px rgba(0,0,0,0.2);
 }
-.kpi-card:hover { transform:translateY(-4px); box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4); border-color: rgba(255,255,255,0.1); }
+.kpi-card:hover { transform:translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.4); border-color: rgba(255,255,255,0.1); }
 .kpi-card::before {
   content:''; position:absolute; top:0; left:0; right:0; height:2px;
   background:var(--card-accent, var(--accent));
@@ -204,16 +203,6 @@ footer {
 }
 footer p { font-size:11px; color:var(--muted); }
 
-/* ── Tooltip ── */
-.tooltip-custom {
-  background:#1e2a3a !important; border:1px solid var(--border) !important;
-  border-radius:8px !important; padding:10px 14px !important;
-  font-family:'DM Sans',sans-serif !important;
-}
-
-/* ── Number animation ── */
-.count-up { transition:opacity .3s; }
-
 @keyframes fadeIn { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
 .kpi-card, .card, .insight-card { animation: fadeIn .5s ease forwards; }
 .kpi-card:nth-child(2) { animation-delay:.05s; }
@@ -221,58 +210,43 @@ footer p { font-size:11px; color:var(--muted); }
 .kpi-card:nth-child(4) { animation-delay:.15s; }
 .kpi-card:nth-child(5) { animation-delay:.2s; }
 
-/* ── Responsive Media Queries ── */
+/* ── Responsive ── */
 @media (max-width: 1200px) {
   .kpi-grid { grid-template-columns: repeat(3, 1fr); }
   .row-3 { grid-template-columns: 1fr 1fr; }
   .row-3 .card:first-child { grid-column: span 2; }
 }
-
 @media (max-width: 1024px) {
   .insights-grid { grid-template-columns: repeat(2, 1fr); }
 }
-
 @media (max-width: 768px) {
   .wrap { padding: 16px 14px; }
-  
   header { flex-direction: column; align-items: flex-start; gap: 14px; margin-bottom: 20px; padding-bottom: 16px; }
   .header-left h1 { font-size: 19px; line-height: 1.3; }
-  .header-left p { margin-top: 6px; font-size: 11.5px; }
   .header-right { flex-wrap: wrap; gap: 8px; width: 100%; }
-  
   .filters { gap: 8px; margin-bottom: 20px; }
-  .filters .filter-btn { padding: 10px 14px; font-size: 12px; flex: 1 1 calc(33.33% - 8px); text-align: center; } 
-  
+  .filters .filter-btn { padding: 10px 14px; font-size: 12px; flex: 1 1 calc(33.33% - 8px); text-align: center; }
   .kpi-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 20px; }
   .kpi-card { padding: 16px; }
   .kpi-value { font-size: 22px; }
   .kpi-icon { font-size: 18px; top: 12px; right: 12px; }
-  
   .charts-row { grid-template-columns: 1fr !important; gap: 16px; margin-bottom: 16px; }
   .row-3 .card:first-child { grid-column: auto; }
   .card { padding: 16px; }
-  .card-title { font-size: 14px; }
-  
   .insights-grid { grid-template-columns: 1fr; gap: 12px; }
   .insight-card { padding: 16px; }
-  
-  .table-responsive { margin-top: 12px; }
   .plat-table th, .plat-table td { padding: 10px 8px; font-size: 11px; white-space: nowrap; }
-  
   footer { flex-direction: column; text-align: center; gap: 12px; margin-top: 24px; padding-top: 20px; }
 }
-
 @media (max-width: 480px) {
   .filters .filter-btn { flex: 1 1 calc(50% - 8px); }
   .kpi-grid { grid-template-columns: 1fr; }
   .badge { padding: 6px 10px; font-size: 11px; flex: 1 1 auto; text-align: center; }
-  .header-right button { width: 100%; justify-content: center; margin-left: 0 !important; }
 }
-
 @media print {
   body { background: #fff !important; color: #000 !important; }
   .filters, .header-right button { display: none !important; }
-  .card, .kpi-card, .insight-card { 
+  .card, .kpi-card, .insight-card {
     background: #fff !important; border: 1px solid #ccc !important;
     box-shadow: none !important; break-inside: avoid;
     backdrop-filter: none !important; -webkit-backdrop-filter: none !important;
@@ -282,7 +256,6 @@ footer p { font-size:11px; color:var(--muted); }
   body::before { display: none; }
   .badge-roas, .insight-tag { border: 1px solid #ccc !important; color: #000 !important; background: transparent !important; }
   .kpi-card::before { display: none !important; }
-  .chart-wrap canvas { max-width: 100% !important; }
 }
 </style>
 </head>
@@ -338,50 +311,41 @@ footer p { font-size:11px; color:var(--muted); }
     <div class="kpi-card" style="--card-accent:#f59e0b">
       <div class="kpi-icon">💸</div>
       <div class="kpi-label">Avg CPA</div>
-      <div class="kpi-value" id="kpi-cpa">68.9 <span>EGP</span></div>
-      <div class="kpi-sub">Per acquired customer</div>
+      <div class="kpi-value" id="kpi-cpa">51.65 <span>EGP</span></div>
+      <div class="kpi-sub" id="kpi-cpa-sub">Per acquired customer</div>
     </div>
     <div class="kpi-card" style="--card-accent:#e1306c">
       <div class="kpi-icon">👥</div>
       <div class="kpi-label">Total Customers</div>
       <div class="kpi-value" id="kpi-cust">3,569</div>
-      <div class="kpi-sub">8,911 leads generated</div>
+      <div class="kpi-sub" id="kpi-leads-sub">8,911 leads generated</div>
     </div>
   </div>
 
-  <!-- ROW 1: Line chart + Donut + Bar -->
+  <!-- ROW 1 -->
   <div class="charts-row row-3">
-
-    <!-- Monthly Trend -->
     <div class="card">
       <div class="card-title">Revenue vs Ad Spend — Monthly Trend</div>
       <div class="card-sub">ROAS evolution across reporting period</div>
       <div class="chart-wrap" style="height: 240px;"><canvas id="lineChart"></canvas></div>
     </div>
-
-    <!-- ROAS by Platform Donut -->
     <div class="card">
       <div class="card-title">Revenue Share by Platform</div>
       <div class="card-sub">Contribution to total revenue</div>
       <div class="chart-wrap" style="height: 240px;"><canvas id="donutChart"></canvas></div>
     </div>
-
-    <!-- CPA Bar -->
     <div class="card">
       <div class="card-title">Avg CPA by Platform</div>
-      <div class="card-sub">Lower = more efficient</div>
+      <div class="card-sub">Lower = more efficient acquisition</div>
       <div id="cpa-bars" style="padding-top:8px"></div>
     </div>
-
   </div>
 
-  <!-- ROW 2: Platform Table + Campaign Chart -->
+  <!-- ROW 2 -->
   <div class="charts-row row-2">
-
-    <!-- Platform Table -->
     <div class="card">
       <div class="card-title">Platform Performance Breakdown</div>
-      <div class="card-sub">Sorted by ROAS — green highlighted = best performer</div>
+      <div class="card-sub">Sorted by ROAS — ★ = best performer in metric</div>
       <div class="table-responsive">
         <table class="plat-table">
           <thead>
@@ -390,7 +354,7 @@ footer p { font-size:11px; color:var(--muted); }
               <th>Ad Spend</th>
               <th>Revenue</th>
               <th>ROAS</th>
-              <th>Avg CPA</th>
+              <th>CPA</th>
               <th>Customers</th>
               <th>Conv. %</th>
             </tr>
@@ -399,181 +363,146 @@ footer p { font-size:11px; color:var(--muted); }
         </table>
       </div>
     </div>
-
-    <!-- Campaign ROAS -->
     <div class="card">
       <div class="card-title">Campaign ROAS Comparison</div>
       <div class="card-sub">Performance across 4 campaign types</div>
       <div class="chart-wrap" style="height: 260px;"><canvas id="campChart"></canvas></div>
     </div>
-
   </div>
 
-  <!-- INSIGHTS -->
-  <div class="insights-grid">
-    <div class="insight-card" style="--ic-color:var(--green)">
-      <div class="insight-icon">🏆</div>
-      <div class="insight-title">Google Ads Dominates</div>
-      <div class="insight-body">Highest revenue at 249,990 EGP with best conversion rate of 6.74%. Despite highest spend, delivers strongest customer acquisition at 1,182 customers.</div>
-      <span class="insight-tag">ACTION: Scale Budget</span>
-    </div>
-    <div class="insight-card" style="--ic-color:var(--accent)">
-      <div class="insight-icon">🎯</div>
-      <div class="insight-title">Summer Sale = Best ROAS</div>
-      <div class="insight-body">Summer Sale campaign achieves 4.38x ROAS — the highest across all campaigns — with the lowest CPA at 57.9 EGP. Most efficient campaign overall.</div>
-      <span class="insight-tag">ACTION: Extend Duration</span>
-    </div>
-    <div class="insight-card" style="--ic-color:var(--yellow)">
-      <div class="insight-icon">⚡</div>
-      <div class="insight-title">TikTok Untapped Potential</div>
-      <div class="insight-body">Smallest budget (31,589 EGP) yet delivers 3.71x ROAS. Strong fit for fashion audiences. A modest budget increase could yield outsized returns.</div>
-      <span class="insight-tag">ACTION: Test & Scale</span>
-    </div>
-    <div class="insight-card" style="--ic-color:var(--red)">
-      <div class="insight-icon">⚠️</div>
-      <div class="insight-title">Instagram Underperforming</div>
-      <div class="insight-body">Lowest ROAS at 3.57x despite high click volume (18,255 clicks). Creative refresh or audience retargeting recommended to improve efficiency.</div>
-      <span class="insight-tag">ACTION: Audit Creatives</span>
-    </div>
-    <div class="insight-card" style="--ic-color:var(--accent2)">
-      <div class="insight-icon">📊</div>
-      <div class="insight-title">January Strongest Month</div>
-      <div class="insight-body">January delivered the highest ROAS at 4.25x with 241,747 EGP revenue. February dipped to 3.58x — investigate creative fatigue or seasonal factors.</div>
-      <span class="insight-tag">ACTION: Replicate Jan Strategy</span>
-    </div>
-    <div class="insight-card" style="--ic-color:var(--muted)">
-      <div class="insight-icon">📉</div>
-      <div class="insight-title">Brand Awareness: Monitor Closely</div>
-      <div class="insight-body">Lowest ROAS at 3.58x. Awareness campaigns support future conversions — track assisted conversions before cutting budget. CPA of 63.8 EGP is reasonable.</div>
-      <span class="insight-tag">ACTION: Track Assisted Conv.</span>
-    </div>
-  </div>
+  <!-- INSIGHTS — dynamic, built from actual data -->
+  <div class="insights-grid" id="insights-grid"></div>
 
   <!-- FOOTER -->
   <footer>
     <p>Marketing Performance Dashboard · Online Fashion Store · Jan–Apr 2026 · 100 campaigns analyzed</p>
-    <p>Built for: Ahmed Al-Arabi — Freelance Analytics Report</p>
+    <p>Prepared by: Ahmed Al-Arabi — Freelance Analytics Report</p>
   </footer>
 
 </div>
 
 <script>
-// ── RAW DATA (per row) ────────────────────────────────────────
+// ══════════════════════════════════════════════════════
+//  RAW DATA — 100 rows exactly from the original Excel
+// ══════════════════════════════════════════════════════
 const RAW = [
-  {date:'2026-01',platform:'Google Ads', campaign:'Weekend Offer',   spend:591,  clicks:821,  leads:26,  customers:28, revenue:2364,  roas:4,   cpa:21.11},
-  {date:'2026-01',platform:'Facebook',   campaign:'Back to School',   spend:2078, clicks:1016, leads:29,  customers:14, revenue:8312,  roas:4,   cpa:148.43},
-  {date:'2026-01',platform:'Instagram',  campaign:'Back to School',   spend:2090, clicks:515,  leads:55,  customers:54, revenue:10450, roas:5,   cpa:38.7},
-  {date:'2026-01',platform:'Instagram',  campaign:'Brand Awareness',  spend:2728, clicks:974,  leads:58,  customers:41, revenue:5456,  roas:2,   cpa:66.54},
-  {date:'2026-01',platform:'Instagram',  campaign:'Brand Awareness',  spend:2238, clicks:399,  leads:21,  customers:23, revenue:8952,  roas:4,   cpa:97.3},
-  {date:'2026-01',platform:'Google Ads', campaign:'Back to School',   spend:1449, clicks:766,  leads:137, customers:29, revenue:5796,  roas:4,   cpa:49.97},
-  {date:'2026-01',platform:'Google Ads', campaign:'Back to School',   spend:1618, clicks:149,  leads:122, customers:15, revenue:9708,  roas:6,   cpa:107.87},
-  {date:'2026-01',platform:'Google Ads', campaign:'Brand Awareness',  spend:2850, clicks:1005, leads:69,  customers:28, revenue:17100, roas:6,   cpa:101.79},
-  {date:'2026-01',platform:'Instagram',  campaign:'Brand Awareness',  spend:1940, clicks:681,  leads:65,  customers:49, revenue:7760,  roas:4,   cpa:39.59},
-  {date:'2026-01',platform:'Google Ads', campaign:'Back to School',   spend:1942, clicks:677,  leads:58,  customers:48, revenue:11652, roas:6,   cpa:40.46},
-  {date:'2026-01',platform:'Instagram',  campaign:'Weekend Offer',    spend:587,  clicks:731,  leads:99,  customers:43, revenue:1761,  roas:3,   cpa:13.65},
-  {date:'2026-01',platform:'TikTok',     campaign:'Brand Awareness',  spend:2461, clicks:531,  leads:20,  customers:37, revenue:7383,  roas:3,   cpa:66.51},
-  {date:'2026-01',platform:'Facebook',   campaign:'Summer Sale',      spend:2038, clicks:110,  leads:47,  customers:53, revenue:10190, roas:5,   cpa:38.45},
-  {date:'2026-01',platform:'Facebook',   campaign:'Weekend Offer',    spend:2223, clicks:426,  leads:81,  customers:58, revenue:6669,  roas:3,   cpa:38.33},
-  {date:'2026-01',platform:'Google Ads', campaign:'Back to School',   spend:2382, clicks:953,  leads:131, customers:27, revenue:9528,  roas:4,   cpa:88.22},
-  {date:'2026-01',platform:'TikTok',     campaign:'Brand Awareness',  spend:2350, clicks:1118, leads:41,  customers:53, revenue:7050,  roas:3,   cpa:44.34},
-  {date:'2026-01',platform:'Instagram',  campaign:'Weekend Offer',    spend:2771, clicks:1040, leads:120, customers:16, revenue:11084, roas:4,   cpa:173.19},
-  {date:'2026-01',platform:'Google Ads', campaign:'Brand Awareness',  spend:2507, clicks:558,  leads:96,  customers:30, revenue:12535, roas:5,   cpa:83.57},
-  {date:'2026-01',platform:'Instagram',  campaign:'Weekend Offer',    spend:636,  clicks:171,  leads:25,  customers:41, revenue:3816,  roas:6,   cpa:15.51},
-  {date:'2026-01',platform:'Facebook',   campaign:'Summer Sale',      spend:2414, clicks:603,  leads:130, customers:23, revenue:7242,  roas:3,   cpa:104.96},
-  {date:'2026-01',platform:'TikTok',     campaign:'Weekend Offer',    spend:2933, clicks:858,  leads:95,  customers:44, revenue:14665, roas:5,   cpa:66.66},
-  {date:'2026-01',platform:'Instagram',  campaign:'Brand Awareness',  spend:1951, clicks:1054, leads:137, customers:41, revenue:9755,  roas:5,   cpa:47.59},
-  {date:'2026-01',platform:'Google Ads', campaign:'Back to School',   spend:2680, clicks:231,  leads:47,  customers:43, revenue:10720, roas:4,   cpa:62.33},
-  {date:'2026-01',platform:'Instagram',  campaign:'Brand Awareness',  spend:935,  clicks:712,  leads:79,  customers:57, revenue:4675,  roas:5,   cpa:16.4},
-  {date:'2026-01',platform:'Instagram',  campaign:'Back to School',   spend:1575, clicks:909,  leads:111, customers:10, revenue:3150,  roas:2,   cpa:157.5},
-  {date:'2026-01',platform:'Google Ads', campaign:'Weekend Offer',    spend:2164, clicks:366,  leads:140, customers:55, revenue:10820, roas:5,   cpa:39.35},
-  {date:'2026-01',platform:'Facebook',   campaign:'Weekend Offer',    spend:1056, clicks:874,  leads:135, customers:7,  revenue:5280,  roas:5,   cpa:150.86},
-  {date:'2026-01',platform:'Instagram',  campaign:'Back to School',   spend:1508, clicks:289,  leads:57,  customers:7,  revenue:4524,  roas:3,   cpa:215.43},
-  {date:'2026-01',platform:'Facebook',   campaign:'Weekend Offer',    spend:2225, clicks:358,  leads:137, customers:22, revenue:13350, roas:6,   cpa:101.14},
-  {date:'2026-02',platform:'Facebook',   campaign:'Weekend Offer',    spend:1784, clicks:1111, leads:104, customers:33, revenue:3568,  roas:2,   cpa:54.06},
-  {date:'2026-02',platform:'Instagram',  campaign:'Brand Awareness',  spend:1195, clicks:439,  leads:27,  customers:50, revenue:3585,  roas:3,   cpa:23.9},
-  {date:'2026-02',platform:'Instagram',  campaign:'Brand Awareness',  spend:2778, clicks:1073, leads:48,  customers:30, revenue:5556,  roas:2,   cpa:92.6},
-  {date:'2026-02',platform:'Instagram',  campaign:'Brand Awareness',  spend:2769, clicks:306,  leads:103, customers:43, revenue:8307,  roas:3,   cpa:64.4},
-  {date:'2026-02',platform:'Google Ads', campaign:'Weekend Offer',    spend:2724, clicks:115,  leads:125, customers:48, revenue:13620, roas:5,   cpa:56.75},
-  {date:'2026-02',platform:'Google Ads', campaign:'Back to School',   spend:1704, clicks:623,  leads:108, customers:10, revenue:5112,  roas:3,   cpa:170.4},
-  {date:'2026-02',platform:'Google Ads', campaign:'Weekend Offer',    spend:1408, clicks:764,  leads:57,  customers:55, revenue:2816,  roas:2,   cpa:25.6},
-  {date:'2026-02',platform:'TikTok',     campaign:'Weekend Offer',    spend:926,  clicks:223,  leads:33,  customers:32, revenue:4630,  roas:5,   cpa:28.94},
-  {date:'2026-02',platform:'Facebook',   campaign:'Back to School',   spend:2247, clicks:677,  leads:85,  customers:28, revenue:6741,  roas:3,   cpa:80.25},
-  {date:'2026-02',platform:'Facebook',   campaign:'Summer Sale',      spend:1329, clicks:964,  leads:85,  customers:33, revenue:5316,  roas:4,   cpa:40.27},
-  {date:'2026-02',platform:'TikTok',     campaign:'Back to School',   spend:1050, clicks:285,  leads:125, customers:27, revenue:6300,  roas:6,   cpa:38.89},
-  {date:'2026-02',platform:'Google Ads', campaign:'Summer Sale',      spend:2361, clicks:166,  leads:98,  customers:18, revenue:11805, roas:5,   cpa:131.17},
-  {date:'2026-02',platform:'Facebook',   campaign:'Summer Sale',      spend:2031, clicks:563,  leads:116, customers:33, revenue:4062,  roas:2,   cpa:61.55},
-  {date:'2026-02',platform:'Facebook',   campaign:'Summer Sale',      spend:1038, clicks:245,  leads:106, customers:42, revenue:6228,  roas:6,   cpa:24.71},
-  {date:'2026-02',platform:'Facebook',   campaign:'Back to School',   spend:2098, clicks:475,  leads:97,  customers:13, revenue:10490, roas:5,   cpa:161.38},
-  {date:'2026-02',platform:'TikTok',     campaign:'Weekend Offer',    spend:512,  clicks:656,  leads:114, customers:53, revenue:2560,  roas:5,   cpa:9.66},
-  {date:'2026-02',platform:'Google Ads', campaign:'Brand Awareness',  spend:2601, clicks:760,  leads:67,  customers:25, revenue:5202,  roas:2,   cpa:104.04},
-  {date:'2026-02',platform:'Facebook',   campaign:'Summer Sale',      spend:1781, clicks:663,  leads:77,  customers:50, revenue:7124,  roas:4,   cpa:35.62},
-  {date:'2026-02',platform:'TikTok',     campaign:'Back to School',   spend:2073, clicks:461,  leads:115, customers:41, revenue:6219,  roas:3,   cpa:50.56},
-  {date:'2026-02',platform:'Google Ads', campaign:'Back to School',   spend:2152, clicks:802,  leads:76,  customers:34, revenue:8608,  roas:4,   cpa:63.29},
-  {date:'2026-02',platform:'Instagram',  campaign:'Summer Sale',      spend:1258, clicks:564,  leads:86,  customers:46, revenue:3774,  roas:3,   cpa:27.35},
-  {date:'2026-02',platform:'Google Ads', campaign:'Brand Awareness',  spend:1453, clicks:1021, leads:112, customers:45, revenue:7265,  roas:5,   cpa:32.29},
-  {date:'2026-02',platform:'Instagram',  campaign:'Weekend Offer',    spend:1664, clicks:867,  leads:124, customers:63, revenue:6656,  roas:4,   cpa:26.41},
-  {date:'2026-03',platform:'Google Ads', campaign:'Summer Sale',      spend:2199, clicks:530,  leads:97,  customers:53, revenue:10995, roas:5,   cpa:41.49},
-  {date:'2026-03',platform:'TikTok',     campaign:'Weekend Offer',    spend:1849, clicks:721,  leads:68,  customers:34, revenue:5547,  roas:3,   cpa:54.38},
-  {date:'2026-03',platform:'Facebook',   campaign:'Back to School',   spend:1671, clicks:381,  leads:51,  customers:41, revenue:6684,  roas:4,   cpa:40.76},
-  {date:'2026-03',platform:'Google Ads', campaign:'Weekend Offer',    spend:2846, clicks:688,  leads:145, customers:64, revenue:11384, roas:4,   cpa:44.47},
-  {date:'2026-03',platform:'TikTok',     campaign:'Brand Awareness',  spend:1694, clicks:425,  leads:54,  customers:35, revenue:5082,  roas:3,   cpa:48.4},
-  {date:'2026-03',platform:'Instagram',  campaign:'Weekend Offer',    spend:2457, clicks:952,  leads:64,  customers:50, revenue:9828,  roas:4,   cpa:49.14},
-  {date:'2026-03',platform:'Facebook',   campaign:'Weekend Offer',    spend:2798, clicks:807,  leads:81,  customers:52, revenue:8394,  roas:3,   cpa:53.81},
-  {date:'2026-03',platform:'Instagram',  campaign:'Back to School',   spend:2327, clicks:613,  leads:120, customers:44, revenue:11635, roas:5,   cpa:52.89},
-  {date:'2026-03',platform:'Google Ads', campaign:'Brand Awareness',  spend:1927, clicks:342,  leads:56,  customers:29, revenue:5781,  roas:3,   cpa:66.45},
-  {date:'2026-03',platform:'Facebook',   campaign:'Brand Awareness',  spend:1514, clicks:770,  leads:128, customers:37, revenue:6056,  roas:4,   cpa:40.92},
-  {date:'2026-03',platform:'TikTok',     campaign:'Summer Sale',      spend:2288, clicks:673,  leads:63,  customers:51, revenue:9152,  roas:4,   cpa:44.86},
-  {date:'2026-03',platform:'Google Ads', campaign:'Back to School',   spend:2576, clicks:461,  leads:66,  customers:52, revenue:10304, roas:4,   cpa:49.54},
-  {date:'2026-03',platform:'Instagram',  campaign:'Brand Awareness',  spend:2464, clicks:942,  leads:80,  customers:35, revenue:9856,  roas:4,   cpa:70.4},
-  {date:'2026-03',platform:'Facebook',   campaign:'Summer Sale',      spend:2387, clicks:893,  leads:115, customers:60, revenue:11935, roas:5,   cpa:39.78},
-  {date:'2026-03',platform:'TikTok',     campaign:'Back to School',   spend:1961, clicks:574,  leads:98,  customers:49, revenue:5883,  roas:3,   cpa:40.02},
-  {date:'2026-03',platform:'Google Ads', campaign:'Summer Sale',      spend:1887, clicks:346,  leads:89,  customers:42, revenue:9435, roas:5,   cpa:44.93},
-  {date:'2026-03',platform:'Instagram',  campaign:'Summer Sale',      spend:1698, clicks:713,  leads:72,  customers:55, revenue:8490,  roas:5,   cpa:30.87},
-  {date:'2026-03',platform:'Facebook',   campaign:'Brand Awareness',  spend:2399, clicks:559,  leads:91,  customers:37, revenue:7197,  roas:3,   cpa:64.84},
-  {date:'2026-03',platform:'Google Ads', campaign:'Weekend Offer',    spend:1980, clicks:428,  leads:100, customers:41, revenue:7920,  roas:4,   cpa:48.29},
-  {date:'2026-03',platform:'Instagram',  campaign:'Back to School',   spend:2533, clicks:819,  leads:87,  customers:35, revenue:10132, roas:4,   cpa:72.37},
-  {date:'2026-03',platform:'TikTok',     campaign:'Weekend Offer',    spend:2193, clicks:561,  leads:77,  customers:58, revenue:10965, roas:5,   cpa:37.81},
-  {date:'2026-04',platform:'Google Ads', campaign:'Brand Awareness',  spend:2015, clicks:492,  leads:84,  customers:56, revenue:8060,  roas:4,   cpa:35.98},
-  {date:'2026-04',platform:'Facebook',   campaign:'Back to School',   spend:1786, clicks:327,  leads:62,  customers:45, revenue:7144,  roas:4,   cpa:39.69},
-  {date:'2026-04',platform:'TikTok',     campaign:'Brand Awareness',  spend:1341, clicks:639,  leads:59,  customers:38, revenue:4023,  roas:3,   cpa:35.29},
-  {date:'2026-04',platform:'Instagram',  campaign:'Weekend Offer',    spend:1532, clicks:752,  leads:110, customers:62, revenue:6128,  roas:4,   cpa:24.71},
-  {date:'2026-04',platform:'Google Ads', campaign:'Back to School',   spend:2434, clicks:875,  leads:128, customers:74, revenue:9736,  roas:4,   cpa:32.89},
-  {date:'2026-04',platform:'Facebook',   campaign:'Summer Sale',      spend:1532, clicks:441,  leads:95,  customers:44, revenue:7660,  roas:5,   cpa:34.82},
-  {date:'2026-04',platform:'Instagram',  campaign:'Brand Awareness',  spend:1908, clicks:510,  leads:66,  customers:42, revenue:7632,  roas:4,   cpa:45.43},
-  {date:'2026-04',platform:'Google Ads', campaign:'Weekend Offer',    spend:2481, clicks:696,  leads:113, customers:78, revenue:9924,  roas:4,   cpa:31.81},
-  {date:'2026-04',platform:'TikTok',     campaign:'Summer Sale',      spend:1896, clicks:523,  leads:74,  customers:47, revenue:7584,  roas:4,   cpa:40.34},
-  {date:'2026-04',platform:'Facebook',   campaign:'Brand Awareness',  spend:1785, clicks:614,  leads:97,  customers:53, revenue:7140,  roas:4,   cpa:33.68},
-  {date:'2026-04',platform:'Google Ads', campaign:'Summer Sale',      spend:1854, clicks:382,  leads:88,  customers:60, revenue:9270,  roas:5,   cpa:30.9},
-  {date:'2026-04',platform:'Instagram',  campaign:'Back to School',   spend:1939, clicks:597,  leads:103, customers:48, revenue:7756,  roas:4,   cpa:40.4},
-  {date:'2026-04',platform:'TikTok',     campaign:'Weekend Offer',    spend:1676, clicks:431,  leads:88,  customers:52, revenue:6704,  roas:4,   cpa:32.23},
-  {date:'2026-04',platform:'Facebook',   campaign:'Weekend Offer',    spend:1599, clicks:738,  leads:121, customers:61, revenue:6396,  roas:4,   cpa:26.21},
+  {date:'2026-01',platform:'Google Ads',campaign:'Weekend Offer',spend:591,clicks:821,leads:26,customers:28,revenue:2364,roas:4,cpa:21.11},
+  {date:'2026-01',platform:'Facebook',campaign:'Back to School',spend:2078,clicks:1016,leads:29,customers:14,revenue:8312,roas:4,cpa:148.43},
+  {date:'2026-01',platform:'Instagram',campaign:'Back to School',spend:2090,clicks:515,leads:55,customers:54,revenue:10450,roas:5,cpa:38.7},
+  {date:'2026-01',platform:'Instagram',campaign:'Brand Awareness',spend:2728,clicks:974,leads:58,customers:41,revenue:5456,roas:2,cpa:66.54},
+  {date:'2026-01',platform:'Instagram',campaign:'Brand Awareness',spend:2238,clicks:399,leads:21,customers:23,revenue:8952,roas:4,cpa:97.3},
+  {date:'2026-01',platform:'Google Ads',campaign:'Back to School',spend:1449,clicks:766,leads:137,customers:29,revenue:5796,roas:4,cpa:49.97},
+  {date:'2026-01',platform:'Google Ads',campaign:'Back to School',spend:1618,clicks:149,leads:122,customers:15,revenue:9708,roas:6,cpa:107.87},
+  {date:'2026-01',platform:'Google Ads',campaign:'Brand Awareness',spend:2850,clicks:1005,leads:69,customers:28,revenue:17100,roas:6,cpa:101.79},
+  {date:'2026-01',platform:'Instagram',campaign:'Brand Awareness',spend:1940,clicks:681,leads:65,customers:49,revenue:7760,roas:4,cpa:39.59},
+  {date:'2026-01',platform:'Google Ads',campaign:'Back to School',spend:1942,clicks:677,leads:58,customers:48,revenue:11652,roas:6,cpa:40.46},
+  {date:'2026-01',platform:'Instagram',campaign:'Weekend Offer',spend:587,clicks:731,leads:99,customers:43,revenue:1761,roas:3,cpa:13.65},
+  {date:'2026-01',platform:'TikTok',campaign:'Brand Awareness',spend:2461,clicks:531,leads:20,customers:37,revenue:7383,roas:3,cpa:66.51},
+  {date:'2026-01',platform:'Facebook',campaign:'Summer Sale',spend:2038,clicks:110,leads:47,customers:53,revenue:10190,roas:5,cpa:38.45},
+  {date:'2026-01',platform:'Facebook',campaign:'Weekend Offer',spend:2223,clicks:426,leads:81,customers:58,revenue:6669,roas:3,cpa:38.33},
+  {date:'2026-01',platform:'Google Ads',campaign:'Back to School',spend:2382,clicks:953,leads:131,customers:27,revenue:9528,roas:4,cpa:88.22},
+  {date:'2026-01',platform:'TikTok',campaign:'Brand Awareness',spend:2350,clicks:1118,leads:41,customers:53,revenue:7050,roas:3,cpa:44.34},
+  {date:'2026-01',platform:'Instagram',campaign:'Weekend Offer',spend:2771,clicks:1040,leads:120,customers:16,revenue:11084,roas:4,cpa:173.19},
+  {date:'2026-01',platform:'Google Ads',campaign:'Brand Awareness',spend:2507,clicks:558,leads:96,customers:30,revenue:12535,roas:5,cpa:83.57},
+  {date:'2026-01',platform:'Instagram',campaign:'Weekend Offer',spend:636,clicks:171,leads:25,customers:41,revenue:3816,roas:6,cpa:15.51},
+  {date:'2026-01',platform:'Facebook',campaign:'Summer Sale',spend:2414,clicks:603,leads:130,customers:23,revenue:7242,roas:3,cpa:104.96},
+  {date:'2026-01',platform:'TikTok',campaign:'Weekend Offer',spend:2933,clicks:858,leads:95,customers:44,revenue:14665,roas:5,cpa:66.66},
+  {date:'2026-01',platform:'Instagram',campaign:'Brand Awareness',spend:1951,clicks:1054,leads:137,customers:41,revenue:9755,roas:5,cpa:47.59},
+  {date:'2026-01',platform:'Google Ads',campaign:'Back to School',spend:2680,clicks:231,leads:47,customers:43,revenue:10720,roas:4,cpa:62.33},
+  {date:'2026-01',platform:'Instagram',campaign:'Brand Awareness',spend:935,clicks:712,leads:79,customers:57,revenue:4675,roas:5,cpa:16.4},
+  {date:'2026-01',platform:'Instagram',campaign:'Back to School',spend:1575,clicks:909,leads:111,customers:10,revenue:3150,roas:2,cpa:157.5},
+  {date:'2026-01',platform:'Google Ads',campaign:'Weekend Offer',spend:2164,clicks:366,leads:140,customers:55,revenue:10820,roas:5,cpa:39.35},
+  {date:'2026-01',platform:'Facebook',campaign:'Weekend Offer',spend:1056,clicks:874,leads:135,customers:7,revenue:5280,roas:5,cpa:150.86},
+  {date:'2026-01',platform:'Instagram',campaign:'Back to School',spend:1508,clicks:289,leads:57,customers:7,revenue:4524,roas:3,cpa:215.43},
+  {date:'2026-01',platform:'Facebook',campaign:'Weekend Offer',spend:2225,clicks:358,leads:137,customers:22,revenue:13350,roas:6,cpa:101.14},
+  {date:'2026-02',platform:'Facebook',campaign:'Weekend Offer',spend:1784,clicks:1111,leads:104,customers:33,revenue:3568,roas:2,cpa:54.06},
+  {date:'2026-02',platform:'Instagram',campaign:'Brand Awareness',spend:1195,clicks:439,leads:27,customers:50,revenue:3585,roas:3,cpa:23.9},
+  {date:'2026-02',platform:'Instagram',campaign:'Brand Awareness',spend:2778,clicks:1073,leads:48,customers:30,revenue:5556,roas:2,cpa:92.6},
+  {date:'2026-02',platform:'Instagram',campaign:'Brand Awareness',spend:2769,clicks:306,leads:103,customers:43,revenue:8307,roas:3,cpa:64.4},
+  {date:'2026-02',platform:'Google Ads',campaign:'Weekend Offer',spend:2724,clicks:115,leads:125,customers:48,revenue:13620,roas:5,cpa:56.75},
+  {date:'2026-02',platform:'Google Ads',campaign:'Back to School',spend:1704,clicks:623,leads:108,customers:10,revenue:5112,roas:3,cpa:170.4},
+  {date:'2026-02',platform:'Google Ads',campaign:'Weekend Offer',spend:1408,clicks:764,leads:57,customers:55,revenue:2816,roas:2,cpa:25.6},
+  {date:'2026-02',platform:'TikTok',campaign:'Weekend Offer',spend:926,clicks:223,leads:33,customers:32,revenue:4630,roas:5,cpa:28.94},
+  {date:'2026-02',platform:'Facebook',campaign:'Back to School',spend:2247,clicks:677,leads:85,customers:28,revenue:6741,roas:3,cpa:80.25},
+  {date:'2026-02',platform:'Facebook',campaign:'Summer Sale',spend:1329,clicks:964,leads:85,customers:33,revenue:5316,roas:4,cpa:40.27},
+  {date:'2026-02',platform:'TikTok',campaign:'Back to School',spend:1050,clicks:285,leads:125,customers:27,revenue:6300,roas:6,cpa:38.89},
+  {date:'2026-02',platform:'Google Ads',campaign:'Summer Sale',spend:2361,clicks:166,leads:98,customers:18,revenue:11805,roas:5,cpa:131.17},
+  {date:'2026-02',platform:'Facebook',campaign:'Summer Sale',spend:2031,clicks:563,leads:116,customers:33,revenue:4062,roas:2,cpa:61.55},
+  {date:'2026-02',platform:'Facebook',campaign:'Summer Sale',spend:1038,clicks:245,leads:106,customers:42,revenue:6228,roas:6,cpa:24.71},
+  {date:'2026-02',platform:'Facebook',campaign:'Back to School',spend:2098,clicks:475,leads:97,customers:13,revenue:10490,roas:5,cpa:161.38},
+  {date:'2026-02',platform:'TikTok',campaign:'Weekend Offer',spend:512,clicks:656,leads:114,customers:53,revenue:2560,roas:5,cpa:9.66},
+  {date:'2026-02',platform:'Google Ads',campaign:'Brand Awareness',spend:2601,clicks:760,leads:67,customers:25,revenue:5202,roas:2,cpa:104.04},
+  {date:'2026-02',platform:'Facebook',campaign:'Summer Sale',spend:1781,clicks:663,leads:77,customers:50,revenue:7124,roas:4,cpa:35.62},
+  {date:'2026-02',platform:'TikTok',campaign:'Brand Awareness',spend:735,clicks:1041,leads:135,customers:15,revenue:4410,roas:6,cpa:49.0},
+  {date:'2026-02',platform:'Google Ads',campaign:'Brand Awareness',spend:1391,clicks:375,leads:40,customers:33,revenue:2782,roas:2,cpa:42.15},
+  {date:'2026-02',platform:'Instagram',campaign:'Brand Awareness',spend:1715,clicks:626,leads:150,customers:22,revenue:5145,roas:3,cpa:77.95},
+  {date:'2026-02',platform:'Instagram',campaign:'Summer Sale',spend:2495,clicks:725,leads:127,customers:52,revenue:14970,roas:6,cpa:47.98},
+  {date:'2026-02',platform:'Facebook',campaign:'Weekend Offer',spend:584,clicks:1134,leads:69,customers:21,revenue:1752,roas:3,cpa:27.81},
+  {date:'2026-02',platform:'TikTok',campaign:'Weekend Offer',spend:2369,clicks:304,leads:91,customers:35,revenue:4738,roas:2,cpa:67.69},
+  {date:'2026-02',platform:'Instagram',campaign:'Brand Awareness',spend:2776,clicks:1091,leads:33,customers:42,revenue:8328,roas:3,cpa:66.1},
+  {date:'2026-02',platform:'Google Ads',campaign:'Back to School',spend:1806,clicks:121,leads:52,customers:54,revenue:3612,roas:2,cpa:33.44},
+  {date:'2026-02',platform:'Instagram',campaign:'Summer Sale',spend:944,clicks:388,leads:121,customers:60,revenue:5664,roas:6,cpa:15.73},
+  {date:'2026-02',platform:'Facebook',campaign:'Weekend Offer',spend:1860,clicks:154,leads:110,customers:11,revenue:11160,roas:6,cpa:169.09},
+  {date:'2026-03',platform:'Instagram',campaign:'Brand Awareness',spend:1628,clicks:619,leads:61,customers:48,revenue:6512,roas:4,cpa:33.92},
+  {date:'2026-03',platform:'Facebook',campaign:'Back to School',spend:515,clicks:753,leads:115,customers:38,revenue:2575,roas:5,cpa:13.55},
+  {date:'2026-03',platform:'Google Ads',campaign:'Weekend Offer',spend:991,clicks:114,leads:76,customers:32,revenue:4955,roas:5,cpa:30.97},
+  {date:'2026-03',platform:'TikTok',campaign:'Back to School',spend:1555,clicks:476,leads:22,customers:19,revenue:4665,roas:3,cpa:81.84},
+  {date:'2026-03',platform:'Facebook',campaign:'Summer Sale',spend:2464,clicks:1148,leads:120,customers:26,revenue:9856,roas:4,cpa:94.77},
+  {date:'2026-03',platform:'TikTok',campaign:'Summer Sale',spend:1515,clicks:701,leads:132,customers:13,revenue:4545,roas:3,cpa:116.54},
+  {date:'2026-03',platform:'Instagram',campaign:'Back to School',spend:587,clicks:496,leads:122,customers:42,revenue:1174,roas:2,cpa:13.98},
+  {date:'2026-03',platform:'Google Ads',campaign:'Summer Sale',spend:946,clicks:1051,leads:116,customers:58,revenue:3784,roas:4,cpa:16.31},
+  {date:'2026-03',platform:'Instagram',campaign:'Weekend Offer',spend:2036,clicks:386,leads:122,customers:9,revenue:6108,roas:3,cpa:226.22},
+  {date:'2026-03',platform:'Google Ads',campaign:'Brand Awareness',spend:2428,clicks:147,leads:116,customers:59,revenue:14568,roas:6,cpa:41.15},
+  {date:'2026-03',platform:'TikTok',campaign:'Weekend Offer',spend:1459,clicks:499,leads:59,customers:60,revenue:2918,roas:2,cpa:24.32},
+  {date:'2026-03',platform:'Instagram',campaign:'Back to School',spend:2213,clicks:357,leads:25,customers:14,revenue:8852,roas:4,cpa:158.07},
+  {date:'2026-03',platform:'Google Ads',campaign:'Back to School',spend:1955,clicks:567,leads:67,customers:48,revenue:9775,roas:5,cpa:40.73},
+  {date:'2026-03',platform:'Google Ads',campaign:'Brand Awareness',spend:1747,clicks:885,leads:99,customers:48,revenue:3494,roas:2,cpa:36.4},
+  {date:'2026-03',platform:'TikTok',campaign:'Brand Awareness',spend:2491,clicks:350,leads:95,customers:10,revenue:12455,roas:5,cpa:249.1},
+  {date:'2026-03',platform:'Facebook',campaign:'Weekend Offer',spend:1160,clicks:1016,leads:99,customers:43,revenue:4640,roas:4,cpa:26.98},
+  {date:'2026-03',platform:'Facebook',campaign:'Back to School',spend:2919,clicks:421,leads:86,customers:33,revenue:11676,roas:4,cpa:88.45},
+  {date:'2026-03',platform:'TikTok',campaign:'Weekend Offer',spend:2562,clicks:878,leads:90,customers:33,revenue:15372,roas:6,cpa:77.64},
+  {date:'2026-03',platform:'Facebook',campaign:'Weekend Offer',spend:1911,clicks:919,leads:132,customers:13,revenue:5733,roas:3,cpa:147.0},
+  {date:'2026-03',platform:'TikTok',campaign:'Weekend Offer',spend:2165,clicks:1064,leads:62,customers:21,revenue:6495,roas:3,cpa:103.1},
+  {date:'2026-03',platform:'TikTok',campaign:'Back to School',spend:2288,clicks:879,leads:58,customers:31,revenue:4576,roas:2,cpa:73.81},
+  {date:'2026-03',platform:'Instagram',campaign:'Back to School',spend:801,clicks:850,leads:133,customers:40,revenue:2403,roas:3,cpa:20.02},
+  {date:'2026-03',platform:'Google Ads',campaign:'Summer Sale',spend:787,clicks:920,leads:61,customers:18,revenue:4722,roas:6,cpa:43.72},
+  {date:'2026-03',platform:'Google Ads',campaign:'Back to School',spend:1177,clicks:659,leads:146,customers:24,revenue:2354,roas:2,cpa:49.04},
+  {date:'2026-03',platform:'Instagram',campaign:'Weekend Offer',spend:2404,clicks:326,leads:80,customers:59,revenue:7212,roas:3,cpa:40.75},
+  {date:'2026-03',platform:'Google Ads',campaign:'Back to School',spend:2830,clicks:266,leads:45,customers:48,revenue:11320,roas:4,cpa:58.96},
+  {date:'2026-03',platform:'Google Ads',campaign:'Weekend Offer',spend:1531,clicks:343,leads:71,customers:36,revenue:9186,roas:6,cpa:42.53},
+  {date:'2026-03',platform:'Instagram',campaign:'Brand Awareness',spend:1326,clicks:1021,leads:96,customers:57,revenue:2652,roas:2,cpa:23.26},
+  {date:'2026-03',platform:'Facebook',campaign:'Weekend Offer',spend:2054,clicks:608,leads:130,customers:27,revenue:10270,roas:5,cpa:76.07},
+  {date:'2026-03',platform:'Google Ads',campaign:'Weekend Offer',spend:2923,clicks:909,leads:94,customers:12,revenue:8769,roas:3,cpa:243.58},
+  {date:'2026-03',platform:'TikTok',campaign:'Back to School',spend:854,clicks:302,leads:107,customers:42,revenue:4270,roas:5,cpa:20.33},
+  {date:'2026-04',platform:'Instagram',campaign:'Back to School',spend:2236,clicks:750,leads:92,customers:43,revenue:11180,roas:5,cpa:52.0},
+  {date:'2026-04',platform:'Google Ads',campaign:'Brand Awareness',spend:2798,clicks:506,leads:132,customers:52,revenue:11192,roas:4,cpa:53.81},
+  {date:'2026-04',platform:'Facebook',campaign:'Back to School',spend:1174,clicks:946,leads:65,customers:33,revenue:7044,roas:6,cpa:35.58},
+  {date:'2026-04',platform:'Google Ads',campaign:'Summer Sale',spend:2193,clicks:530,leads:30,customers:55,revenue:6579,roas:3,cpa:39.87},
+  {date:'2026-04',platform:'TikTok',campaign:'Brand Awareness',spend:2381,clicks:153,leads:137,customers:48,revenue:7143,roas:3,cpa:49.6},
+  {date:'2026-04',platform:'Facebook',campaign:'Summer Sale',spend:2702,clicks:880,leads:144,customers:48,revenue:16212,roas:6,cpa:56.29},
+  {date:'2026-04',platform:'TikTok',campaign:'Brand Awareness',spend:983,clicks:108,leads:50,customers:39,revenue:2949,roas:3,cpa:25.21},
+  {date:'2026-04',platform:'Instagram',campaign:'Weekend Offer',spend:1192,clicks:486,leads:141,customers:27,revenue:4768,roas:4,cpa:44.15},
+  {date:'2026-04',platform:'Google Ads',campaign:'Back to School',spend:1485,clicks:539,leads:63,customers:52,revenue:4455,roas:3,cpa:28.56},
+  {date:'2026-04',platform:'Google Ads',campaign:'Back to School',spend:2831,clicks:738,leads:94,customers:56,revenue:14155,roas:5,cpa:50.55},
+  {date:'2026-04',platform:'Instagram',campaign:'Back to School',spend:1472,clicks:841,leads:109,customers:53,revenue:2944,roas:2,cpa:27.77},
+  {date:'2026-04',platform:'Google Ads',campaign:'Back to School',spend:2755,clicks:907,leads:146,customers:38,revenue:5510,roas:2,cpa:72.5}
 ];
 
 const PLATFORM_COLORS = {
-  'Google Ads':'#4285f4',
-  'Facebook':'#1877f2',
-  'Instagram':'#e1306c',
-  'TikTok':'#69c9d0',
+  'Google Ads':'#4285f4','Facebook':'#1877f2','Instagram':'#e1306c','TikTok':'#69c9d0'
 };
 const CAMPAIGN_COLORS = {
-  'Summer Sale':'#00d4ff',
-  'Weekend Offer':'#7c3aed',
-  'Back to School':'#f59e0b',
-  'Brand Awareness':'#10b981',
+  'Summer Sale':'#00d4ff','Weekend Offer':'#7c3aed','Back to School':'#f59e0b','Brand Awareness':'#10b981'
 };
+const MONTH_LABELS = {'2026-01':'Jan','2026-02':'Feb','2026-03':'Mar','2026-04':'Apr'};
 
-// ── State ─────────────────────────────────────────────────────
 let activePlatform = 'All';
-
-// ── Chart defaults ────────────────────────────────────────────
 Chart.defaults.color = '#64748b';
 Chart.defaults.font.family = 'DM Sans';
 const gridLine = { color:'rgba(31,45,69,.8)', lineWidth:1 };
-
-// ── Chart instances ───────────────────────────────────────────
 let lineChart, donutChart, campChart;
 
-// ── Core: filter & aggregate ──────────────────────────────────
+// ── Aggregation helpers ──────────────────────────────────────
 function getFiltered() {
   return activePlatform === 'All' ? RAW : RAW.filter(r => r.platform === activePlatform);
 }
@@ -581,15 +510,15 @@ function getFiltered() {
 function aggregateByPlatform(data) {
   const map = {};
   data.forEach(r => {
-    if (!map[r.platform]) map[r.platform] = {name:r.platform, spend:0, revenue:0, clicks:0, leads:0, customers:0, cpaSum:0, count:0};
+    if (!map[r.platform]) map[r.platform] = {name:r.platform, spend:0, revenue:0, clicks:0, leads:0, customers:0};
     const p = map[r.platform];
     p.spend += r.spend; p.revenue += r.revenue; p.clicks += r.clicks;
-    p.leads += r.leads; p.customers += r.customers; p.cpaSum += r.cpa; p.count++;
+    p.leads += r.leads; p.customers += r.customers;
   });
   return Object.values(map).map(p => ({
     ...p,
     roas: +(p.revenue / p.spend).toFixed(2),
-    avg_cpa: p.customers > 0 ? +(p.spend / p.customers).toFixed(1) : 0,
+    cpa:  p.customers > 0 ? +(p.spend / p.customers).toFixed(2) : 0,
     conv: +((p.customers / p.clicks) * 100).toFixed(2),
     color: PLATFORM_COLORS[p.name] || '#64748b'
   })).sort((a,b) => b.roas - a.roas);
@@ -598,14 +527,14 @@ function aggregateByPlatform(data) {
 function aggregateByCampaign(data) {
   const map = {};
   data.forEach(r => {
-    if (!map[r.campaign]) map[r.campaign] = {name:r.campaign, spend:0, revenue:0, customers:0, cpaSum:0, count:0};
+    if (!map[r.campaign]) map[r.campaign] = {name:r.campaign, spend:0, revenue:0, customers:0};
     const c = map[r.campaign];
-    c.spend += r.spend; c.revenue += r.revenue; c.customers += r.customers; c.cpaSum += r.cpa; c.count++;
+    c.spend += r.spend; c.revenue += r.revenue; c.customers += r.customers;
   });
   return Object.values(map).map(c => ({
     ...c,
     roas: +(c.revenue / c.spend).toFixed(2),
-    avg_cpa: c.customers > 0 ? +(c.spend / c.customers).toFixed(1) : 0,
+    cpa:  c.customers > 0 ? +(c.spend / c.customers).toFixed(2) : 0,
     color: CAMPAIGN_COLORS[c.name] || '#64748b'
   })).sort((a,b) => b.roas - a.roas);
 }
@@ -618,32 +547,38 @@ function aggregateByMonth(data) {
     map[r.date].revenue  += r.revenue;
     map[r.date].customers+= r.customers;
   });
-  const labels = {
-    '2026-01':'Jan','2026-02':'Feb','2026-03':'Mar','2026-04':'Apr'
-  };
   return Object.values(map)
     .sort((a,b) => a.month.localeCompare(b.month))
-    .map(m => ({...m, label: labels[m.month]||m.month, roas: +(m.revenue/m.spend).toFixed(2)}));
+    .map(m => ({...m, label: MONTH_LABELS[m.month]||m.month, roas: +(m.revenue/m.spend).toFixed(2)}));
 }
 
-// ── KPI update ────────────────────────────────────────────────
+// ── KPI update ───────────────────────────────────────────────
 function updateKPIs(data) {
   const spend    = data.reduce((s,r)=>s+r.spend,0);
   const revenue  = data.reduce((s,r)=>s+r.revenue,0);
   const clicks   = data.reduce((s,r)=>s+r.clicks,0);
   const customers= data.reduce((s,r)=>s+r.customers,0);
   const leads    = data.reduce((s,r)=>s+r.leads,0);
-  const roas     = revenue/spend;
-  const cpa = customers > 0 ? spend / customers : 0;
+  const roas     = +(revenue/spend).toFixed(2);
+  const cpa      = customers > 0 ? +(spend/customers).toFixed(2) : 0;
 
-  document.getElementById('kpi-spend').innerHTML = `${spend.toLocaleString()} <span>EGP</span>`;
-  document.getElementById('kpi-rev').innerHTML   = `${revenue.toLocaleString()} <span>EGP</span>`;
-  document.getElementById('kpi-roas').innerHTML  = `${roas.toFixed(2)} <span>x</span>`;
-  document.getElementById('kpi-cpa').innerHTML   = `${cpa.toFixed(1)} <span>EGP</span>`;
-  document.getElementById('kpi-cust').innerHTML  = `${customers.toLocaleString()} <small style="font-size:11px;color:var(--muted);font-family:'DM Sans'">(${leads.toLocaleString()} leads)</small>`;
+  document.getElementById('kpi-spend').innerHTML  = `${spend.toLocaleString()} <span>EGP</span>`;
+  document.getElementById('kpi-rev').innerHTML    = `${revenue.toLocaleString()} <span>EGP</span>`;
+  document.getElementById('kpi-roas').innerHTML   = `${roas} <span>x</span>`;
+  document.getElementById('kpi-cpa').innerHTML    = `${cpa} <span>EGP</span>`;
+  document.getElementById('kpi-cust').innerHTML   = `${customers.toLocaleString()}`;
+  document.getElementById('kpi-leads-sub').textContent = `${leads.toLocaleString()} leads generated`;
+
+  // Update CPA sub with best platform
+  const platData = aggregateByPlatform(data);
+  const bestCPAPlat = [...platData].sort((a,b)=>a.cpa-b.cpa)[0];
+  const cpaSub = document.getElementById('kpi-cpa-sub');
+  if (cpaSub && bestCPAPlat) {
+    cpaSub.textContent = `Best: ${bestCPAPlat.name} ${bestCPAPlat.cpa} EGP`;
+  }
 }
 
-// ── Line Chart ────────────────────────────────────────────────
+// ── Line Chart ───────────────────────────────────────────────
 function buildLineChart(monthly) {
   if (lineChart) lineChart.destroy();
   lineChart = new Chart(document.getElementById('lineChart'), {
@@ -651,28 +586,9 @@ function buildLineChart(monthly) {
     data:{
       labels: monthly.map(m=>m.label),
       datasets:[
-        {
-          label:'Revenue (EGP)',
-          data: monthly.map(m=>m.revenue),
-          borderColor:'#00d4ff', backgroundColor:'rgba(0,212,255,.08)',
-          borderWidth:2.5, fill:true, tension:.4, pointRadius:5,
-          pointBackgroundColor:'#00d4ff', pointBorderColor:'#0b0f1a', pointBorderWidth:2, yAxisID:'y'
-        },
-        {
-          label:'Ad Spend (EGP)',
-          data: monthly.map(m=>m.spend),
-          borderColor:'#7c3aed', backgroundColor:'rgba(124,58,237,.06)',
-          borderWidth:2, fill:true, tension:.4, pointRadius:4,
-          pointBackgroundColor:'#7c3aed', pointBorderColor:'#0b0f1a', pointBorderWidth:2, yAxisID:'y'
-        },
-        {
-          label:'ROAS',
-          data: monthly.map(m=>m.roas),
-          borderColor:'#10b981', borderWidth:2, tension:.4,
-          pointRadius:5, pointBackgroundColor:'#10b981',
-          pointBorderColor:'#0b0f1a', pointBorderWidth:2,
-          borderDash:[6,3], yAxisID:'y2', fill:false
-        }
+        {label:'Revenue (EGP)', data:monthly.map(m=>m.revenue), borderColor:'#00d4ff', backgroundColor:'rgba(0,212,255,.08)', borderWidth:2.5, fill:true, tension:.4, pointRadius:5, pointBackgroundColor:'#00d4ff', pointBorderColor:'#0b0f1a', pointBorderWidth:2, yAxisID:'y'},
+        {label:'Ad Spend (EGP)', data:monthly.map(m=>m.spend), borderColor:'#7c3aed', backgroundColor:'rgba(124,58,237,.06)', borderWidth:2, fill:true, tension:.4, pointRadius:4, pointBackgroundColor:'#7c3aed', pointBorderColor:'#0b0f1a', pointBorderWidth:2, yAxisID:'y'},
+        {label:'ROAS', data:monthly.map(m=>m.roas), borderColor:'#10b981', borderWidth:2, tension:.4, pointRadius:5, pointBackgroundColor:'#10b981', pointBorderColor:'#0b0f1a', pointBorderWidth:2, borderDash:[6,3], yAxisID:'y2', fill:false}
       ]
     },
     options:{
@@ -690,7 +606,7 @@ function buildLineChart(monthly) {
   });
 }
 
-// ── Donut Chart ───────────────────────────────────────────────
+// ── Donut Chart ──────────────────────────────────────────────
 function buildDonutChart(platData) {
   if (donutChart) donutChart.destroy();
   donutChart = new Chart(document.getElementById('donutChart'), {
@@ -708,8 +624,7 @@ function buildDonutChart(platData) {
       responsive:true, maintainAspectRatio:false, cutout:'68%', animation:{duration:500},
       plugins:{
         legend:{ position:'bottom', labels:{ boxWidth:10, boxHeight:10, padding:14, font:{size:11} } },
-        tooltip:{
-          backgroundColor:'#1e2a3a', borderColor:'#1f2d45', borderWidth:1, padding:12,
+        tooltip:{ backgroundColor:'#1e2a3a', borderColor:'#1f2d45', borderWidth:1, padding:12,
           callbacks:{ label: ctx => ` ${ctx.label}: ${(ctx.parsed/1000).toFixed(0)}k EGP` }
         }
       }
@@ -717,7 +632,7 @@ function buildDonutChart(platData) {
   });
 }
 
-// ── Campaign Chart ────────────────────────────────────────────
+// ── Campaign Chart ───────────────────────────────────────────
 function buildCampChart(campData) {
   if (campChart) campChart.destroy();
   campChart = new Chart(document.getElementById('campChart'), {
@@ -725,22 +640,8 @@ function buildCampChart(campData) {
     data:{
       labels: campData.map(c=>c.name),
       datasets:[
-        {
-          label:'ROAS',
-          data: campData.map(c=>c.roas),
-          backgroundColor: campData.map(c=>c.color+'bb'),
-          borderColor: campData.map(c=>c.color),
-          borderWidth:1.5, borderRadius:6, yAxisID:'y'
-        },
-        {
-          label:'Avg CPA (EGP)',
-          data: campData.map(c=>c.avg_cpa),
-          backgroundColor:'rgba(245,158,11,.15)',
-          borderColor:'#f59e0b', borderWidth:2.5,
-          type:'line', tension:0.4, pointRadius:4,
-          pointBackgroundColor:'#f59e0b', pointBorderColor:'#0b0f1a', pointBorderWidth:2,
-          yAxisID:'y2'
-        }
+        {label:'ROAS', data:campData.map(c=>c.roas), backgroundColor:campData.map(c=>c.color+'bb'), borderColor:campData.map(c=>c.color), borderWidth:1.5, borderRadius:6, yAxisID:'y'},
+        {label:'Avg CPA (EGP)', data:campData.map(c=>c.cpa), backgroundColor:'rgba(245,158,11,.15)', borderColor:'#f59e0b', borderWidth:2.5, type:'line', tension:0.4, pointRadius:4, pointBackgroundColor:'#f59e0b', pointBorderColor:'#0b0f1a', pointBorderWidth:2, yAxisID:'y2'}
       ]
     },
     options:{
@@ -758,20 +659,21 @@ function buildCampChart(campData) {
   });
 }
 
-// ── CPA Bars ──────────────────────────────────────────────────
+// ── CPA Bars ─────────────────────────────────────────────────
 function buildCPABars(platData) {
   const barsEl = document.getElementById('cpa-bars');
-  const sorted = [...platData].sort((a,b)=>a.avg_cpa-b.avg_cpa);
-  const maxCpa = Math.max(...sorted.map(p=>p.avg_cpa));
+  const sorted = [...platData].sort((a,b)=>a.cpa-b.cpa);
+  const maxCpa = Math.max(...sorted.map(p=>p.cpa));
   barsEl.innerHTML = '';
   sorted.forEach(p => {
-    const pct = (p.avg_cpa / maxCpa * 100).toFixed(0);
-    const col = p.avg_cpa <= 65 ? '#10b981' : p.avg_cpa <= 72 ? '#f59e0b' : '#ef4444';
+    const pct = (p.cpa / maxCpa * 100).toFixed(0);
+    // Green < 50, Yellow 50–65, Red > 65
+    const col = p.cpa < 50 ? '#10b981' : p.cpa <= 60 ? '#f59e0b' : '#ef4444';
     barsEl.innerHTML += `
       <div class="bar-row">
         <div class="bar-meta">
           <span class="bar-name">${p.name}</span>
-          <span class="bar-val" style="color:${col}">${p.avg_cpa} EGP</span>
+          <span class="bar-val" style="color:${col}">${p.cpa} EGP</span>
         </div>
         <div class="bar-track">
           <div class="bar-fill" style="width:0%; background:${col}" data-w="${pct}%"></div>
@@ -787,24 +689,97 @@ function buildCPABars(platData) {
 function buildPlatTable(platData) {
   const tbody = document.getElementById('plat-tbody');
   tbody.innerHTML = '';
-  platData.forEach((p,i) => {
+  // Find best values for each metric
+  const bestROAS = Math.max(...platData.map(p=>p.roas));
+  const bestCPA  = Math.min(...platData.map(p=>p.cpa));
+  const bestConv = Math.max(...platData.map(p=>p.conv));
+
+  platData.forEach((p) => {
     const roasClass = p.roas >= 4.2 ? 'good' : p.roas >= 3.8 ? 'ok' : 'warn';
-    const best = i===0 ? 'style="background:rgba(16,185,129,.04)"' : '';
+    const cpaColor  = p.cpa < 50 ? 'var(--green)' : p.cpa <= 60 ? 'var(--yellow)' : 'var(--red)';
+    const isTopROAS = p.roas === bestROAS;
+    const isTopCPA  = p.cpa  === bestCPA;
+    const isTopConv = p.conv === bestConv;
     tbody.innerHTML += `
-      <tr ${best}>
+      <tr>
         <td><div class="plat-name">
           <div class="plat-dot" style="background:${p.color}"></div>
           <span class="plat-name-text">${p.name}</span>
-          ${i===0?'<span style="font-size:10px;color:var(--green);margin-left:4px">★ Best</span>':''}
+          ${isTopROAS?'<span style="font-size:10px;color:var(--green);margin-left:4px">★ ROAS</span>':''}
         </div></td>
         <td style="color:var(--muted)">${p.spend.toLocaleString()}</td>
         <td style="color:#fff;font-weight:500">${p.revenue.toLocaleString()}</td>
         <td><span class="badge-roas ${roasClass}">${p.roas}x</span></td>
-        <td style="color:${p.avg_cpa<=65?'var(--green)':p.avg_cpa<=72?'var(--yellow)':'var(--red)'}">${p.avg_cpa}</td>
+        <td style="color:${cpaColor}">${p.cpa} ${isTopCPA?'★':''}</td>
         <td style="color:#fff">${p.customers.toLocaleString()}</td>
-        <td style="color:var(--muted)">${p.conv}%</td>
+        <td style="color:${isTopConv?'var(--green)':'var(--muted)'}">${p.conv}% ${isTopConv?'★':''}</td>
       </tr>`;
   });
+}
+
+// ── Dynamic Insights ─────────────────────────────────────────
+function buildInsights(platData, campData, monthly) {
+  const grid = document.getElementById('insights-grid');
+
+  // Best ROAS platform
+  const topROAS = platData[0];
+  // Best CPA platform
+  const topCPA  = [...platData].sort((a,b)=>a.cpa-b.cpa)[0];
+  // Best campaign
+  const topCamp = campData[0];
+  // Worst campaign
+  const worstCamp = campData[campData.length-1];
+  // Best month
+  const bestMonth = [...monthly].sort((a,b)=>b.roas-a.roas)[0];
+  // Weakest platform
+  const weakPlat = platData[platData.length-1];
+
+  const cards = [
+    {
+      icon:'🏆', color:'var(--green)',
+      title:`${topROAS.name} — Best ROAS`,
+      body:`Achieves the highest ROAS at ${topROAS.roas}x with ${topROAS.revenue.toLocaleString()} EGP revenue and ${topROAS.customers.toLocaleString()} customers acquired.`,
+      tag:'ACTION: Scale Budget'
+    },
+    {
+      icon:'💸', color:'var(--accent)',
+      title:`${topCPA.name} — Lowest CPA`,
+      body:`Most cost-efficient platform at ${topCPA.cpa} EGP per customer. Delivers strong value even with ${topCPA.conv}% conversion rate.`,
+      tag:'ACTION: Prioritize Conversions'
+    },
+    {
+      icon:'📊', color:'var(--yellow)',
+      title:`Best Campaign: ${topCamp.name}`,
+      body:`Highest ROAS at ${topCamp.roas}x across all campaigns with a CPA of ${topCamp.cpa} EGP — the most efficient campaign overall.`,
+      tag:'ACTION: Extend & Replicate'
+    },
+    {
+      icon:'📉', color:'var(--accent2)',
+      title:`Weakest Campaign: ${worstCamp.name}`,
+      body:`ROAS of ${worstCamp.roas}x is the lowest across campaigns. Monitor assisted conversions and downstream impact before reducing budget.`,
+      tag:'ACTION: Track Assisted Conv.'
+    },
+    {
+      icon:'📅', color:'#f59e0b',
+      title:`${bestMonth.label} Was Strongest Month`,
+      body:`${bestMonth.label} 2026 delivered the best ROAS at ${bestMonth.roas}x with ${bestMonth.revenue.toLocaleString()} EGP revenue. Analyze that period's creative and targeting.`,
+      tag:'ACTION: Replicate Strategy'
+    },
+    {
+      icon:'⚡', color:'var(--tiktok, #69c9d0)',
+      title:`${weakPlat.name} — Opportunity`,
+      body:`Lowest ROAS at ${weakPlat.roas}x but ${weakPlat.name === 'TikTok' ? 'smallest budget allocation — strong potential for fashion audiences with more creative testing.' : 'high click volume suggests creative refresh or audience retargeting could improve results.'}`,
+      tag:'ACTION: Test & Optimize'
+    }
+  ];
+
+  grid.innerHTML = cards.map(c => `
+    <div class="insight-card" style="--ic-color:${c.color}">
+      <div class="insight-icon">${c.icon}</div>
+      <div class="insight-title">${c.title}</div>
+      <div class="insight-body">${c.body}</div>
+      <span class="insight-tag">${c.tag}</span>
+    </div>`).join('');
 }
 
 // ── Master render ─────────────────────────────────────────────
@@ -820,9 +795,10 @@ function render() {
   buildCampChart(campData);
   buildCPABars(platData);
   buildPlatTable(platData);
+  buildInsights(platData, campData, monthly);
 }
 
-// ── Filter buttons ────────────────────────────────────────────
+// ── Filters ───────────────────────────────────────────────────
 function filterAll(btn) {
   activePlatform = 'All';
   document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
@@ -838,7 +814,6 @@ function filterPlatform(btn) {
 
 // ── Init ──────────────────────────────────────────────────────
 render();
-
 </script>
 </body>
 </html>
